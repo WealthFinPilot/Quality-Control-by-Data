@@ -10,7 +10,7 @@
 | Champ | Valeur |
 |---|---|
 | Titre affiché | Quality Control by Data |
-| Repo GitHub | `spectrometer-qc-dashboard` (public) |
+| Repo GitHub | `Quality-Control-by-Data` (public) |
 | Déploiement | Netlify — statique, zéro backend |
 | Stack | HTML / CSS / JS vanilla, zéro dépendance npm en production |
 | Auteur portfolio | Sébastien Oger — Quality Manager |
