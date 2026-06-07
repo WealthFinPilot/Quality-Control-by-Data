@@ -4,7 +4,7 @@
 > Une application web qui surveille, dans le temps, la justesse d'un spectromètre
 > d'émission optique de laboratoire, et relie ses dérives aux opérations de maintenance.
 
-🔗 **Démo en ligne** : _(lien Netlify à ajouter après déploiement)_
+🔗 **Démo en ligne** : [quality-control-by-data.netlify.app](https://quality-control-by-data.netlify.app/)
 
 ---
 
