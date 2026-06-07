@@ -1,0 +1,151 @@
+{
+  "_comment": "Plan de maintenance FICTIF généré pour la démonstration (le fichier source d'origine était confidentiel et non fourni). Les tâches et la logique (routine vs complète, impact) sont fournies par l'auteur ; périodicités, dates, techniciens et notes sont reconstitués pour la démo et alignés sur la période des mesures (2023-2024) afin de corréler dérives et interventions.",
+  "purpose": "Objectif central : prévenir toute contamination de l'appareil et garantir des lectures fiables dans le temps. Le champ 'impact' signale les tâches qui pèsent le plus sur la justesse des mesures (entretien du piston, de la lentille, de la chambre, pression de gaz constante, pièces correctement remontées et vissées).",
+  "procedures": [
+    {
+      "name": "Maintenance de routine",
+      "frequency": "Hebdomadaire",
+      "frequency_days": 7,
+      "plain": "Entretien court et fréquent : l'essentiel pour garder des mesures fiables entre deux maintenances complètes.",
+      "steps": [
+        "Nettoyage de la chambre",
+        "Désencombrer le tuyau",
+        "Nettoyer le filtre",
+        "Contrôle de fuite",
+        "Étalonner l'appareil"
+      ]
+    },
+    {
+      "name": "Maintenance complète",
+      "frequency": "Mensuel",
+      "frequency_days": 30,
+      "plain": "Entretien approfondi une fois par mois : toutes les étapes, y compris celles qui touchent l'optique et le piston.",
+      "steps": [
+        "Nettoyage de la chambre",
+        "Désencombrer le tuyau",
+        "Nettoyer le filtre",
+        "Contrôle de fuite",
+        "Étalonner l'appareil",
+        "Nettoyage à l'alcool du piston",
+        "Nettoyer la lentille",
+        "Vérifier le remontage et le serrage des pièces",
+        "Vérifier les niveaux",
+        "Remettre à niveau l'eau du filtre",
+        "Remplacer les papiers abrasifs",
+        "Nettoyer le plan de travail"
+      ]
+    }
+  ],
+  "preventive_plan": [
+    {
+      "task": "Nettoyage de la chambre",
+      "routine": true,
+      "impact": "élevé",
+      "plain": "On nettoie la chambre où se produit l'étincelle.",
+      "description": "Nettoyage de la chambre d'étincelage : les dépôts métalliques et oxydes contaminent les mesures suivantes."
+    },
+    {
+      "task": "Désencombrer le tuyau",
+      "routine": true,
+      "impact": "standard",
+      "plain": "On dégage le tuyau pour qu'il ne se bouche pas.",
+      "description": "Désobstruction du tuyau d'évacuation / d'aspiration des poussières."
+    },
+    {
+      "task": "Nettoyer le filtre",
+      "routine": true,
+      "impact": "standard",
+      "plain": "On nettoie le filtre du circuit.",
+      "description": "Nettoyage du filtre du circuit d'aspiration / d'argon."
+    },
+    {
+      "task": "Contrôle de fuite",
+      "routine": true,
+      "impact": "élevé",
+      "plain": "On vérifie qu'il n'y a pas de fuite de gaz.",
+      "description": "Contrôle d'étanchéité du circuit d'argon. Une fuite fait chuter la pression et dégrade la justesse des lectures."
+    },
+    {
+      "task": "Étalonner l'appareil",
+      "routine": true,
+      "impact": "élevé",
+      "plain": "On recale la machine sur des échantillons connus.",
+      "description": "Recalibration sur matériaux de référence pour corriger la dérive de mesure."
+    },
+    {
+      "task": "Nettoyage à l'alcool du piston",
+      "routine": false,
+      "impact": "élevé",
+      "plain": "On nettoie à l'alcool la pièce qui maintient l'échantillon.",
+      "description": "Nettoyage à l'alcool du piston de serrage. Un piston encrassé contamine l'échantillon et fausse directement la lecture."
+    },
+    {
+      "task": "Nettoyer la lentille",
+      "routine": false,
+      "impact": "élevé",
+      "plain": "On nettoie l'optique pour garder une mesure nette.",
+      "description": "Nettoyage de la lentille / fenêtre optique. Un dépôt sur l'optique atténue le signal et biaise la mesure."
+    },
+    {
+      "task": "Vérifier le remontage et le serrage des pièces",
+      "routine": false,
+      "impact": "élevé",
+      "plain": "On vérifie que toutes les pièces sont bien remises et serrées.",
+      "description": "Après toute manipulation, contrôler que les pièces sont correctement remontées et vissées. Un montage incorrect crée des fuites et fausse la pression."
+    },
+    {
+      "task": "Vérifier les niveaux",
+      "routine": false,
+      "impact": "standard",
+      "plain": "On contrôle que les niveaux (gaz, fluides) sont suffisants.",
+      "description": "Contrôle visuel des niveaux de gaz et de fluides avant la série de mesures."
+    },
+    {
+      "task": "Remettre à niveau l'eau du filtre",
+      "routine": false,
+      "impact": "standard",
+      "plain": "On complète l'eau du filtre.",
+      "description": "Remise à niveau de l'eau du filtre à eau (piégeage des particules)."
+    },
+    {
+      "task": "Remplacer les papiers abrasifs",
+      "routine": false,
+      "impact": "standard",
+      "plain": "On change les papiers qui préparent la surface des échantillons.",
+      "description": "Remplacement des papiers abrasifs de préparation des surfaces analysées (usure)."
+    },
+    {
+      "task": "Nettoyer le plan de travail",
+      "routine": false,
+      "impact": "standard",
+      "plain": "On garde le poste de travail propre.",
+      "description": "Nettoyage du plan de travail pour éviter toute contamination des échantillons."
+    },
+    {
+      "task": "Changer la bouteille d'argon",
+      "routine": false,
+      "impact": "élevé",
+      "plain": "On remplace la bouteille de gaz quand elle est vide.",
+      "description": "Remplacement de la bouteille d'argon, hors planning fixe (selon consommation). Maintenir une pression de gaz constante est essentiel à la stabilité des mesures."
+    }
+  ],
+  "events": [
+    { "date": "2023-01-09", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance complète de reprise avant le suivi annuel." },
+    { "date": "2023-02-08", "type": "Maintenance complète", "technician": "A.D.", "notes": "Maintenance mensuelle ; optique nettoyée." },
+    { "date": "2023-03-06", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance mensuelle ; léger recalage sur Cr et Ni à l'étalonnage." },
+    { "date": "2023-03-28", "type": "Maintenance de routine", "technician": "A.D.", "notes": "Routine : chambre, tuyau, filtre, fuite, étalonnage." },
+    { "date": "2023-04-19", "type": "Maintenance complète", "technician": "A.D.", "notes": "Maintenance mensuelle complète." },
+    { "date": "2023-05-25", "type": "Maintenance de routine", "technician": "A.D.", "notes": "Routine ; tuyau partiellement obstrué, dégagé." },
+    { "date": "2023-06-15", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance mensuelle complète." },
+    { "date": "2023-07-18", "type": "Ponctuelle", "task": "Changer la bouteille d'argon", "technician": "A.D.", "notes": "Bouteille d'argon vide remplacée (hors planning)." },
+    { "date": "2023-08-24", "type": "Maintenance complète", "technician": "A.D.", "notes": "Maintenance mensuelle ; piston et lentille nettoyés." },
+    { "date": "2023-10-11", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance mensuelle ; étalonnage après dérive observée sur P." },
+    { "date": "2023-12-08", "type": "Maintenance complète", "technician": "A.D.", "notes": "Maintenance mensuelle complète." },
+    { "date": "2024-01-10", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance complète de reprise." },
+    { "date": "2024-03-19", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance mensuelle ; recalage sur Mn et Cr." },
+    { "date": "2024-04-11", "type": "Ponctuelle", "task": "Changer la bouteille d'argon", "technician": "A.D.", "notes": "Remplacement de la bouteille d'argon." },
+    { "date": "2024-05-31", "type": "Maintenance de routine", "technician": "A.D.", "notes": "Routine : chambre, tuyau, filtre, fuite, étalonnage." },
+    { "date": "2024-07-11", "type": "Maintenance complète", "technician": "A.D.", "notes": "Maintenance mensuelle complète." },
+    { "date": "2024-10-07", "type": "Maintenance complète", "technician": "J.M.", "notes": "Maintenance mensuelle complète." }
+  ]
+}

@@ -1,0 +1,25 @@
+# Fichiers source confidentiels — NE JAMAIS COMMITER
+*.xlsx
+*.xlsm
+*.xlsb
+*.bas
+*.cls
+*.frm
+*.frx
+*.pdf
+data/raw/
+
+# Secrets
+*.env
+.env
+
+# Correspondance identifiants réels → alias (ne jamais publier)
+*.local.json
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+__pycache__/
+*.pyc
+/Atome.png

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Control by Data — Contrôle de déviation d'un spectromètre</title>
+  <meta name="description" content="Outil de surveillance de la justesse d'un spectromètre d'émission optique : la machine mesure-t-elle juste dans le temps ? Cartes de contrôle, statuts et maintenance." />
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-grid">
+      <div class="brand">
+        <img src="assets/atome-mark.png" alt="" class="brand-logo" width="34" height="34" />
+        <strong><span class="iso-mark">ISO/IEC&nbsp;17025</span>Quality&nbsp;Control by&nbsp;Data</strong>
+        <span class="tag">Contrôle de déviation d'un spectromètre</span>
+      </div>
+      <div class="std-picker">
+        <label for="std-select">Échantillon de référence</label>
+        <select id="std-select" aria-label="Choisir l'échantillon de référence"></select>
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+    <div class="wrap">
+      <p class="lead">La machine mesure-t-elle toujours juste&nbsp;?</p>
+      <p>
+        Un laboratoire vérifie régulièrement son appareil d'analyse chimique en
+        mesurant des échantillons dont la composition exacte est connue. Cet outil
+        suit ces mesures dans le temps&nbsp;: si l'appareil commence à «&nbsp;dériver&nbsp;»,
+        l'écart est détecté tôt, et on peut le relier à une opération de maintenance.
+      </p>
+    </div>
+  </section>
+
+  <main class="wrap" id="app" aria-busy="true">
+    <div class="tabs" role="tablist" aria-label="Vues de l'outil">
+      <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Vue d'ensemble</button>
+      <button class="tab" role="tab" id="tab-detail" aria-controls="panel-detail" aria-selected="false" tabindex="-1">Détail par élément</button>
+      <button class="tab" role="tab" id="tab-maint" aria-controls="panel-maint" aria-selected="false" tabindex="-1">Maintenance</button>
+      <button class="tab" role="tab" id="tab-report" aria-controls="panel-report" aria-selected="false" tabindex="-1">Rapport</button>
+    </div>
+
+    <!-- Vue 1 : vue d'ensemble -->
+    <section class="tabpanel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+      <div class="verdict" id="verdict" data-status="ok" aria-live="polite">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <h2 id="verdict-title">—</h2>
+          <p id="verdict-plain"></p>
+        </div>
+      </div>
+
+      <div class="timescrub" id="timescrub" hidden>
+        <div class="timescrub-row">
+          <span class="timescrub-caption">Remonter le temps</span>
+          <input type="range" id="time-range" min="0" max="0" step="1" value="0"
+                 aria-label="Choisir le mois affiché" />
+          <strong class="timescrub-now" id="time-label">—</strong>
+        </div>
+        <div class="timescrub-ends">
+          <span id="time-start"></span>
+          <span id="time-end"></span>
+        </div>
+      </div>
+
+      <div class="counters" id="counters" aria-live="polite"></div>
+
+      <h3 class="section-title">Chaque élément mesuré</h3>
+      <p class="muted" style="margin-bottom:1rem; max-width:65ch;">
+        Une tuile par élément chimique suivi. Cliquez pour voir l'évolution dans le temps.
+      </p>
+      <div class="grid" id="element-grid"></div>
+      <p class="grid-legend">
+        <span><span class="lg-glyph lg-glyph-warn" aria-hidden="true">▲</span> dérives relevées depuis le début du suivi</span>
+        <span><span class="lg-glyph lg-glyph-ok" aria-hidden="true">●</span> aucune dérive relevée</span>
+      </p>
+    </section>
+
+    <!-- Vue 2 : détail par élément -->
+    <section class="tabpanel" role="tabpanel" id="panel-detail" aria-labelledby="tab-detail" tabindex="0" hidden>
+      <div class="detail-head">
+        <div>
+          <div class="detail-title">
+            <h2 id="detail-sym">—</h2>
+            <span class="full" id="detail-full"></span>
+          </div>
+          <p class="detail-plain" id="detail-plain"></p>
+          <div class="callout" id="detail-note" hidden></div>
+        </div>
+        <div class="std-picker">
+          <label for="el-select">Élément</label>
+          <select id="el-select" aria-label="Choisir l'élément à détailler"></select>
+        </div>
+      </div>
+
+      <figure class="chart-card">
+        <div id="chart-host"></div>
+        <figcaption class="chart-legend" id="chart-legend"></figcaption>
+      </figure>
+
+      <details class="expert">
+        <summary>Pour les experts — méthode de calcul</summary>
+        <div class="expert-body">
+          <div class="stat-row" id="expert-stats"></div>
+          <div class="formula" id="expert-formula"></div>
+          <p class="muted" style="margin-top:0.7rem; font-size:0.82rem;">
+            Le z-score compare l'écart à la valeur certifiée, rapporté à la dispersion
+            historique. |z| ≥ 2 = à surveiller, |z| ≥ 3 = anomalie. Limites de contrôle
+            recalculées sur l'historique réel (moyenne ± 2σ et ± 3σ).
+          </p>
+        </div>
+      </details>
+
+      <h3 class="section-title">Données brutes</h3>
+      <div class="table-scroll">
+        <table id="detail-table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Valeur mesurée</th>
+              <th scope="col">Écart à la cible</th>
+              <th scope="col">z-score</th>
+              <th scope="col">État</th>
+            </tr>
+          </thead>
+          <tbody id="detail-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Vue 3 : maintenance -->
+    <section class="tabpanel" role="tabpanel" id="panel-maint" aria-labelledby="tab-maint" tabindex="0" hidden>
+      <p class="detail-plain" id="maint-purpose" style="max-width:72ch;"></p>
+
+      <div class="maint-grid">
+        <div>
+          <h3 class="section-title">Plan de maintenance préventive</h3>
+          <p class="muted" style="margin-bottom:0.8rem; max-width:60ch; font-size:0.85rem;">
+            Deux niveaux&nbsp;: une <strong>routine</strong> courte et fréquente, et une
+            <strong>maintenance complète</strong> mensuelle. ● = forte influence sur la justesse des mesures.
+          </p>
+          <div id="procedures"></div>
+          <div class="table-scroll" style="margin-top:1.2rem;">
+            <table id="plan-table" class="plan-table">
+              <thead>
+                <tr>
+                  <th scope="col">Tâche</th>
+                  <th scope="col">Niveau</th>
+                  <th scope="col">Impact</th>
+                </tr>
+              </thead>
+              <tbody id="plan-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="section-title">Historique des interventions</h3>
+          <p class="muted" style="margin-bottom:0.8rem; max-width:60ch; font-size:0.85rem;">
+            Ces interventions apparaissent aussi en pointillés sur les cartes de contrôle,
+            pour relier une dérive à une opération.
+          </p>
+          <ul class="timeline" id="maint-timeline"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vue 4 : rapport imprimable -->
+    <section class="tabpanel" role="tabpanel" id="panel-report" aria-labelledby="tab-report" tabindex="0" hidden>
+      <div class="report-bar report-print-hide">
+        <p class="muted" style="margin:0; max-width:55ch;">
+          Rapport de contrôle prêt à imprimer ou à enregistrer en PDF (bouton ci-contre,
+          puis « Enregistrer au format PDF » dans la boîte d'impression).
+        </p>
+        <button type="button" class="btn-print" id="print-btn">Imprimer / PDF</button>
+      </div>
+      <article id="report-body" class="report"></article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>
+        Démonstration de portfolio — <strong>Sébastien Oger</strong>, Quality Manager.
+        <a href="https://www.linkedin.com/in/s%C3%A9bastien-oger-49009382/" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
+      <span class="muted">
+        Données anonymisées (alias STD-A / STD-B) et maintenance fictive. Aucune dépendance externe.
+      </span>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="status" aria-live="off"></div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "_comment": "MODÈLE. Copier en 'aliases.local.json' (gitignoré) et remplir avec la correspondance réelle. La clé = identifiant réel du standard tel qu'il apparaît dans la feuille 'Analyse' du .xlsm ; la valeur = alias public neutre.",
+  "IDENTIFIANT-REEL-1": "STD-A",
+  "IDENTIFIANT-REEL-2": "STD-B"
+}
