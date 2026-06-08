@@ -11,12 +11,12 @@
 ## Aperçu
 
 | Vue d'ensemble | Détail par élément |
-|---|---|
-| ![Vue d'ensemble](assets/ScreenShot-vue-ensemble.jpeg) | ![Détail par élément](assets/ScreenShot-Detail-par-element.png) |
+|:---:|:---:|
+| <img src="assets/ScreenShot-vue-ensemble.jpeg" width="100%"> | <img src="assets/ScreenShot-Detail-par-element.png" width="100%"> |
 
-| Maintenance | Rapport de contrôle |
-|---|---|
-| ![Maintenance](assets/ScreenShot-Maintenance.png) | ![Rapport](assets/ScreenShot-Rapport-de-controle-de-deviation.png) |
+| Plan de maintenance | Rapport de contrôle |
+|:---:|:---:|
+| <img src="assets/ScreenShot-Maintenance.png" width="100%"> | <img src="assets/ScreenShot-Rapport-de-controle-de-deviation.png" width="100%"> |
 
 ---
 
