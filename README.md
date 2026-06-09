@@ -1,5 +1,8 @@
 # Contrôle de la qualité par la data
 
+![Status](https://img.shields.io/badge/status-in%20active%20use-brightgreen)
+![ISO/IEC 17025](https://img.shields.io/badge/ISO%2FIEC-17025-0A66C2)
+
 > **Surveiller, détecter, corriger — maîtriser la dérive d'un équipement d'analyse de précision dans le temps.**
 
 🔗 **Démo en ligne** : [quality-control-by-data.netlify.app](https://quality-control-by-data.netlify.app/)
