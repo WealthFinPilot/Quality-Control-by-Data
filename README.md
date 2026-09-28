@@ -5,7 +5,7 @@
 
 > **Surveiller, détecter, corriger — maîtriser la dérive d'un équipement d'analyse de précision dans le temps.**
 
-🔗 **Démo en ligne** : [quality-control-by-data.netlify.app](https://quality-control-by-data.netlify.app/)
+🔗 **Démo en ligne** : [sebastienoger.ca/projets/quality-control-by-data](https://sebastienoger.ca/projets/quality-control-by-data)
 
 ---
 
